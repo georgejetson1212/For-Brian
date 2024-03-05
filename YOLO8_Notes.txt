@@ -1,0 +1,105 @@
+
+yolo detect predict model=LPR_v1.pt source='rtsp://192.168.3.33/axis-media/media.amp' save=True save_crop=True stream_buffer=True
+
+
+Common issue:
+	Must have either CUDA 11.8 or 12.1 installed associated but seperate from your NVIDIA driver.
+	If not, then your GPU will not be detected as available 
+
+	https://developer.nvidia.com/cuda-12-1-0-download-archive
+	https://developer.nvidia.com/cuda-11.3.0-download-archive
+
+
+To get setup:
+	browse, download, and install python 3.8.10
+	browse, copy command for comand line and install pytorch
+	pip install ultralytics
+	pip install opencv-python
+	pip install opencv-contrib-python
+	pip install secure-smtplib
+	pip install pandas
+	pip install supervision
+	pip install --upgrade youtube-dl
+
+
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+
+For LPR detection will need, additionally:
+	pip install easyocr
+	pip install filterpy
+	gh repo clone abewley/sort (clones this dir -- https://github.com/abewley/sort.git)
+
+
+
+Running from command line:
+	model=yolov8n.pt means use the pre-trained model on coco dataset
+	model=GA-Contrails-Birds.v13i.yolov8.pt means use my model
+
+	source=0 means use the webcam
+	source="rtsp://192.168.5.34/axis-media/media.amp" [[means use the streaming feed from a axis camera]]
+	source=list.streams [[means look for text file with that name, list up to 8 IP streams]] 
+	source="https://www.youtube.com/live/N9P24SBeu4E?feature=shared" [[webcam]]
+
+
+yolo detect predict model=yolov8n.pt source=0 save=True save_crop=True stream_buffer=True show=True
+
+yolo detect predict model=LPR_v1.pt source=source="rtsp://192.168.5.34/axis-media/media.amp" save_crop=True stream_buffer=True show=True
+
+yolo detect predict model=LPRv1.pt source=list.streams save=True save_crop=True stream_buffer=True show=True
+
+Training
+
+First, change the path in your Ultralytics settings.yaml file located:
+C:\Users\user\AppData\Roaming\Ultralytics
+
+datasets_dir: C:\Users\user\folder-containing-dataset
+
+
+Next, navidgate via terminal window to the directory and start training via Command line input:
+cd C:\Users\user\folder-containing-dataset
+
+yolo detect train data=data.yaml model=yolov8n.pt epochs=200
+
+
+
+
+Automated Alerts via Email:
+
+Setup a gmail account
+
+You must enabe 2-factory Authentification to allow creating a "App Password". This is a 16 letter password that is seperate from your logon to gmail and used for applications you trust to access your email.
+
+Navigate to Account-->Security --> 2 Step Verification --> scroll bottom to "App Passwords"
+
+Input a name and click Create
+
+Use this password in any automated python/coding script to login and send emails.
+
+A txt msg can be sent by using email, using the following syntax adn current interface servers for telcos:
+
+https://en.wikipedia.org/wiki/SMS_gateway
+
+Ex. 
+For AT&T subcribers = 5555555555@txt.att.net
+
+
+Webcams:
+
+Houston = https://www.youtube.com/live/DTLIqs3mWiM?feature=shared
+Sampson St East
+
+https://www.youtube.com/live/XJRnxHb4AgU?feature=shared
+T&NO Junction
+Mykawa/Griggs Rd
+
+https://www.youtube.com/live/gpSR9c0p6lI?feature=shared
+Baer Junction
+1000 Lockwood Drive
+
+Poland church = https://www.youtube.com/live/BIViTz6bwIs?feature=shared
+Address = Rybałtów 25, 02-886 Warszawa, Mazowieckie
+
+Denver 16th St Mall = https://youtu.be/65zBXVetyNI
+
+Airport Canary Islands = https://www.youtube.com/live/AAlo3eCPVbk?feature=shared
